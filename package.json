@@ -1,0 +1,27 @@
+{
+  "name": "kimi",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.11.0",
+    "canvas": "^3.1.2",
+    "docxtemplater": "^3.65.2",
+    "express": "^5.1.0",
+    "fs-extra": "^11.3.0",
+    "libreoffice": "^0.4.5",
+    "mammoth": "^1.9.1",
+    "multer": "^2.0.2",
+    "officegen": "^0.6.5",
+    "open-docxtemplater-image-module": "^1.0.3",
+    "pizzip": "^3.2.0",
+    "puppeteer-core": "^24.15.0",
+    "sharp": "^0.34.3"
+  }
+}
