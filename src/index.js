@@ -29,24 +29,25 @@ app.post('/generate', async (req, res) => {
 
     // 3) تنظیم ماژول تصویر
     const opts = {
-  centered: false,
-  getImage: (tagValue) => fs.readFileSync(tagValue),
-  getSize: () => [500, 250],
-};
-
-const imageModule = new ImageModule(opts);
+      centered: false,
+      getImage: (tag) => fs.readFileSync(tag),
+      getSize: () => [500, 250],
+    };
 
     // 4) بارگذاری docxtemplater
     const doc = new Docxtemplater(zip, {
       paragraphLoop: true,
       linebreaks: true,
-      modules: [imageModule],
+      modules: [ new ImageModule(opts)],
     });
 
     // 6) پر کردن متغیرها
     doc.render({
-      salesTable: data.salesTable || [],
-      chartImage: chartPath,
+      reportTitle:  data.reportTitle  || '',
+      reportDate:   data.reportDate   || '',
+      reportSummary:data.reportSummary|| '',
+      salesTable:   data.salesTable   || [],
+      chartImage:   chartPath
     });
 
     // 7) ذخیره‌ی Word
@@ -54,7 +55,7 @@ const imageModule = new ImageModule(opts);
     await fs.writeFile(tempDocx, doc.getZip().generate({ type: 'nodebuffer' }));
 
     // 8) تبدیل به PDF
-    const pdfPath = await convertToPdf(tempDocx);
+    const pdfPath = await convertToPdf(tempDocx, chartPath);
 
     // 9) دانلود
     res.download(pdfPath, 'report.pdf');
